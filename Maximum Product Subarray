@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int counter = nums.size();
+        int ans = INT_MIN;
+        int carry = 1;
+        for (int i = 0; i < counter; i++){
+            ans = max(ans, carry *= nums[i]);
+            if (nums[i] == 0){
+                carry = 1;
+            }
+        }
+
+        int carry2 = 1;
+        for (int j = counter - 1; j >= 0; j--){
+            ans = max(ans, carry2 *= nums[j]);
+            if (nums[j] == 0){
+                carry2 = 1;
+            }
+        }
+        return ans;
+    }
+};
