@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+
+        
+        std::unordered_map<char, int>p_count;
+        std::unordered_map<char, int>s_count;
+        int left = 0;
+        int right = 0;
+        int windowwide = p.length();
+        std::vector<int> arr;
+        if(s.length() < p.length())return arr;
+            for (char c : p){
+               p_count[c]++;  
+            }
+
+        while (right < s.length()){
+            s_count[s[right]]++;
+            if (right - left + 1 == p.length()){
+                if (s_count == p_count){
+                    arr.push_back(left);
+                }
+                s_count[s[left]]--;
+                if (s_count[s[left]] == 0){
+                s_count.erase(s[left]);
+                }
+                left++;
+
+            }
+            right++;
+
+        }
+        return arr;
+
+    }
+};
