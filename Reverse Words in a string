@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+
+        std::reverse(s.begin(),s.end());
+        int left = 0;
+        int right = 0;
+        while (right < s.size()){
+            while (right < s.size() && s[right] != ' '){
+                right++;
+            }
+            std::reverse(s.begin()+left, s.begin()+right);
+            right++;
+             while (right < s.size() && s[right] == ' '){
+                right++;
+             }
+            left = right;
+        }
+
+
+        int n = s.size();
+        int left1 = 0, right1 = n - 1;
+
+        // 去掉前导空格
+        while (left1 <= right1 && s[left1] == ' ') left1++;
+        // 去掉后缀空格
+        while (right1 >= left1 && s[right1] == ' ') right1--;
+
+        string temp;
+        while (left1 <= right1) {
+            if (s[left1] != ' ') {
+                temp += s[left1];
+            } else if (temp.back() != ' ') { 
+                // 遇到多个空格时只保留一个
+                temp += ' ';
+            }
+            left1++;
+        }
+        return temp;
+    }
+};
